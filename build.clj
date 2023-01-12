@@ -24,11 +24,12 @@
 
 (defn uberjar [arg]
   (compile arg)
-  (let [basis (b/create-basis {:project "deps.edn" :aliases [:jdk-17 :dev]})]
+  (let [basis (b/create-basis {:project "deps.edn" :aliases [:jdk-17]})]
     (b/compile-clj {:basis basis
                     :src-dirs ["src"]
-                    :class-dir class-dir})
+                    :class-dir class-dir
+                    :java-opts ["--add-modules" "jdk.incubator.vector"]})
     (b/uber {:class-dir class-dir
              :uber-file uber-file
              :basis basis
-             :main 'liebnitz.main})))
+             :main 'leibniz.main})))
