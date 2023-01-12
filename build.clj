@@ -21,29 +21,14 @@
             :javac-opts ["-Xlint:unchecked"
                          "--add-modules" "jdk.incubator.vector"]}))
 
-(defn jar [_]
-  (compile nil)
-  (b/write-pom {:class-dir class-dir
-                :lib lib
-                :version version
-                :basis basis
-                :src-dirs ["src"]})
-  (b/copy-dir {:src-dirs ["src" "resources"]
-               :target-dir class-dir})
-  (b/jar {:class-dir class-dir
-          :jar-file jar-file}))
 
-
-(defn perftest [_]
-  (let [basis (b/create-basis {:aliases [:dev]})]
-    (clean nil)
-    (compile nil)
-    (b/copy-dir {:src-dirs ["src" "dev/resources" "dev/src"]
-                 :target-dir class-dir})
+(defn uberjar [arg]
+  (compile arg)
+  (let [basis (b/create-basis {:project "deps.edn" :aliases [:jdk-17 :dev]})]
     (b/compile-clj {:basis basis
-                    :src-dirs ["dev/src"]
+                    :src-dirs ["src"]
                     :class-dir class-dir})
     (b/uber {:class-dir class-dir
              :uber-file uber-file
              :basis basis
-             :main 'perftest})))
+             :main 'liebnitz.main})))
