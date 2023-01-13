@@ -1,4 +1,11 @@
+# Java VecOps Example
+
+
+Problem taken from the [leibniz speed comparison page](https://github.com/niklas-heer/speed-comparison).
+
+
 ## Usage
+
 
 source scripts/enable-jdk19
 

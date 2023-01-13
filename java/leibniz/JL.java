@@ -37,13 +37,13 @@ public class JL {
       sumTarget = sumTarget.add(ones.div(divConstants.add(dvecLen*vidx).mul(aones)));
     }
 
-    double retval = sumTarget.reduceLanes(VectorOperators.ADD) * 4.0;
+    double pi = sumTarget.reduceLanes(VectorOperators.ADD);
     for(int idx = nVecGroups * vecLen; idx < rounds; ++idx) {
-      final double x = -1.0 + 2.0 * ((idx+1) & 0x1);
-      retval += (x / (2 * (idx+1)));
+      final double x = 1.0 - (2.0 * (idx & 0x1));
+      pi += (x / (1 + (2*idx)));
     }
-
-    return retval;
+    
+    return pi;
   }
 
 }
