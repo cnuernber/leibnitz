@@ -43,7 +43,7 @@ public class JL {
       pi += (x / (1 + (2*idx)));
     }
     
-    return pi;
+    return pi * 4;
   }
 
 }
